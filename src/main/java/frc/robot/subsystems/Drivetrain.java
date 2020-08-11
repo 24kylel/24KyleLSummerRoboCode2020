@@ -1,23 +1,30 @@
 package frc.robot.subsystems;
+import java.io.*;
+
 public class Drivetrain {
 
-    private static Drivetrain drivetrain = new Drivetrain( );
- 
+    private static Drivetrain drivetrain;
+    private static Drivetrain motor1;
+    private static Drivetrain motor2;
+    private static Drivetrain motor3;
+    private static Drivetrain motor4;
+   
     private Drivetrain() { }
  
     public static Drivetrain getInstance( ) {
-       return drivetrain;
+      if(drivetrain == null){
+         drivetrain = new Drivetrain();
+      }
+      return drivetrain;
     }
- 
+//motor speed, direction, rotational speed, distance
     /* Other methods protected by singleton-ness */
-    static void demoMethod( ) {
+    void demoMethod() {
        System.out.println("demoMethod for singleton");
     }
- }
-  class DrivetrainDemo {
-
-    public static void main(String[] args) {
-       Drivetrain tmp = Drivetrain.getInstance( );
-       tmp.demoMethod( );
+    public static void TalonInit(boolean invert_state){
+       if(invert_state == true){
+          invert_state = false;
+       }
     }
- } 
+ }
