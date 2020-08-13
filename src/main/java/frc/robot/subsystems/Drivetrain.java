@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import harkerrobolib.wrappers.HSTalon;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 public class Drivetrain extends SubsystemBase {
 
    private static Drivetrain drivetrain;
@@ -38,6 +39,14 @@ public class Drivetrain extends SubsystemBase {
       leftFollower = new HSTalon(RobotMap.LEFT_FOLLOWER_CANID);
       rightMaster = new HSTalon(RobotMap.RIGHT_MASTER_CANID);
       rightFollower = new HSTalon(RobotMap.RIGHT_FOLLOWER_CANID);
+
+   }
+
+   public HSTalon getLeftMaster(){
+      return leftMaster;
+   }
+   public HSTalon getRightMaster(){
+      return rightMaster;
    }
    
    public void talonInit() {
@@ -57,7 +66,9 @@ public class Drivetrain extends SubsystemBase {
       rightMaster.setSensorPhase(RIGHT_MASTER_SENSOR_PHASE);
       leftMaster.setSensorPhase(LEFT_MASTER_SENSOR_PHASE);
       
-      leftMaster.configSelectedFeedbackSensor(CTRE_MagEncoder_Relative, RobotMap.LOOP_INDEX_PRIMARY);
+      leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.LOOP_INDEX_PRIMARY);
+      rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.LOOP_INDEX_PRIMARY);
+
 
    }
    public void configPositionPIDConstants(){
