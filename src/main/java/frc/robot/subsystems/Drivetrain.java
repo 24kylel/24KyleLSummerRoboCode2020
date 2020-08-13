@@ -12,16 +12,15 @@ public class Drivetrain extends SubsystemBase {
    private HSTalon leftFollower;
    private HSTalon rightMaster;
    private HSTalon rightFollower;
-   int PLeft = 1;
-   int ILeft = 2;
-   int DLeft = 3;
+   public static final int KPLEFT = 1;
+   public static final int KILEFT = 2;
+   public static final int KDLEFT = 3;
 
-   int PRight = 1;
-   int IRight = 2;
-   int DRight = 3;
+   public static final int KPRIGHT = 1;
+   public static final int KIRIGHT = 2;
+   public static final int KDRIGHT = 3;
 
-   int pSpecificSlot = 1;
-   int pSpecificSlot2 = 2;
+   public static final int PSLOT = 1;
 
    private static final boolean RIGHT_MASTER_INVERTED = false;
    private static final boolean RIGHT_FOLLOWER_INVERTED = false;
@@ -31,6 +30,9 @@ public class Drivetrain extends SubsystemBase {
    private static final boolean RIGHT_MASTER_SENSOR_PHASE = false;
    
    private static final boolean LEFT_MASTER_SENSOR_PHASE = false;
+
+   public static int ALLOWABLE_ERROR;
+
    private Drivetrain() { 
       leftMaster = new HSTalon(RobotMap.LEFT_MASTER_CANID);
       leftFollower = new HSTalon(RobotMap.LEFT_FOLLOWER_CANID);
@@ -55,15 +57,20 @@ public class Drivetrain extends SubsystemBase {
       rightMaster.setSensorPhase(RIGHT_MASTER_SENSOR_PHASE);
       leftMaster.setSensorPhase(LEFT_MASTER_SENSOR_PHASE);
       
+      leftMaster.configSelectedFeedbackSensor(CTRE_MagEncoder_Relative, RobotMap.LOOP_INDEX_PRIMARY);
+
    }
    public void configPositionPIDConstants(){
-      leftMaster.config_kP(pSpecificSlot, PLeft);
-      leftMaster.config_kI(pSpecificSlot, ILeft);
-      leftMaster.config_kD(pSpecificSlot, DLeft);
+      leftMaster.config_kP(PSLOT, KPLEFT);
+      leftMaster.config_kI(PSLOT, KILEFT);
+      leftMaster.config_kD(PSLOT, KDLEFT);
       
-      rightMaster.config_kP(pSpecificSlot2, PRight);
-      rightMaster.config_kI(pSpecificSlot2, IRight);
-      rightMaster.config_kD(pSpecificSlot2, DRight);
+      rightMaster.config_kP(PSLOT, KPRIGHT);
+      rightMaster.config_kI(PSLOT, KIRIGHT);
+      rightMaster.config_kD(PSLOT, KDRIGHT);
+
+      leftMaster.selectProfileSlot(PSLOT, RobotMap.LOOP_INDEX_PRIMARY);
+      rightMaster.selectProfileSlot(PSLOT, RobotMap.LOOP_INDEX_PRIMARY);
       
 
    }
