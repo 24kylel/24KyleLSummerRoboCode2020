@@ -7,6 +7,8 @@ public class RobotMap {
     public static final int RIGHT_FOLLOWER_CANID = 6;
     public static final int LOOP_INDEX_PRIMARY = 0;
     public static final int LOOP_INDEX_AUXILLIARY = 1;
-    //one for each auxilliary thingy
-    //public static final int 
+    public static final int FORWARD_CHANNEL_EXTENDER = 0;
+    public static final int REVERSE_CHANNEL_EXTENDER =1;
+    public static final int FORWARD_CHANNEL_FLOWER = 0;
+    public static final int REVERSE_CHANNEL_FLOWER =1;
 }
